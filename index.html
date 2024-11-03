@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nanolab Dual Beam</title>
+    <link href="/Users/anthonyhennegan/DevProjects/resources/css/index.css" type="text/css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://threejs.org/examples/js/postprocessing/EffectComposer.js"></script>
+    <script src="https://threejs.org/examples/js/postprocessing/RenderPass.js"></script>
+    <script src="https://threejs.org/examples/js/postprocessing/OutlinePass.js"></script>
+    <script src="https://threejs.org/examples/js/shaders/CopyShader.js"></script>
+    <script src="https://threejs.org/examples/js/postprocessing/ShaderPass.js"></script>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>NANOLAB DUAL BEAM GROUP</h1>
+
+        <nav>
+            <h2 onclick="toggleMenu('queue')">Queue</h2>
+
+            <!-- Dropdown for Training -->
+            <div class="dropdown">
+                <h2>Training</h2>
+                <div class="dropdown-content">
+                    <a href="#overview" onclick="toggleTrainingSection('overview')">Overview</a>
+                    <a href="#semiconductor" onclick="toggleMenu('semiconductor')">Semiconductor Process</a>
+                    <a href="#tool-operation" onclick="toggleTrainingSection('tool-operation')">Tool Operation</a>
+                    <a href="#sample-prep" onclick="toggleTrainingSection('sample-prep')">Sample Prep Technique</a>
+                </div>
+            </div>
+
+            <h2 onclick="toggleMenu('productivity')">Productivity</h2>
+            <h2 onclick="toggleMenu('jobHistory')">Job History</h2>
+
+            <!-- Dropdown for Resources -->
+            <div class="dropdown">
+                <h2>Resources</h2>
+                <div class="dropdown-content">
+                    <a href="#manuals" onclick="toggleResourceSection('manuals')">User Manuals</a>
+                    <a href="#tutorials" onclick="toggleResourceSection('tutorials')">Tutorials</a>
+                    <a href="#guides" onclick="toggleResourceSection('guides')">Guides</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="queue" class="content">
+            <h2>Queue</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Job ID</th>
+                        <th>Customer Name</th>
+                        <th>Status</th>
+                        <th>Due Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr onclick="openOrderDetails('OUTS1111')">
+                        <td>OUTS1111</td>
+                        <td>John Jones</td>
+                        <td>In Progress</td>
+                        <td>10-12-2024 5:00PM</td>
+                    </tr>
+                    <tr onclick="openOrderDetails('OUTS2222')">
+                        <td>OUTS2222</td>
+                        <td>Leon Lett</td>
+                        <td>Pending</td>
+                        <td>10-12-2024 5:00PM</td>
+                    </tr>
+                    <tr onclick="openOrderDetails('OUTS3333')">
+                        <td>OUTS3333</td>
+                        <td>George Carlson</td>
+                        <td>Completed</td>
+                        <td>10-12-2024 5:00PM</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="productivity" class="content">
+            <h2>Productivity</h2>
+            <canvas id="productivityChart" width="400" height="200"></canvas>
+        </section>
+
+        <!-- Training sections for the dropdown content -->
+        <section id="overview" class="content">
+            <h2>Training Overview</h2>
+            <p>This section provides an overview of the training process, including objectives and
+                timelines.</p>
+        </section>
+
+        <section id="semiconductor" class="content">
+            <h2>Semiconductor Process</h2>
+            <div>
+                <ul>
+                    <li><a href="/Users/anthonyhennegan/DevProjects/resources/css/Images/SemiconductorFabDiagram.png"
+                            target="_blank">Basics
+                            of Semiconductor Fabrication</a></li>
+                    <li>Understanding wafer types, doping, and crystal structures.</li>
+                    <li>Familiarity with front-end-of-line(FEOL) process: diffusion, ion implantation, oxidation, and
+                        lithography.</li>
+                    <li>Overview of back-end-of-line (BEOL) processes: metalization, deposition, etching, and
+                        chemical-mechanical planarization (CMP).</li>
+                    <li>Importance of TEM Analysis in Semiconductor Devices.</li>
+                    <li>Role of TEM in failure analysis, defect inspection, and process verification.</li>
+                    <li>Common defects in semiconductor processees such as dislocations, voids, and contamination, and
+                        how they maifest in TEM Imaging.</li>
+                    <li>Understanding transistor structures (e.g., FinFET, GAA-FET) and how they impact sample
+                        preparation.</li>
+                    <li>Knowledge of interconnect layers (Cu, low-k dielectrics)</li>
+                    <li>Stategies for preparing and analyzing complex multi-layer structures like gate stacks,
+                        high-k/metal gates, and diffusion barriers.</li>
+                    <li>Common Failure Mechanisms in Semiconductor Devices</li>
+                    <li>Electrical and physical failure modes such as electromigration, time-dependent dielectric
+                        breakdown (TDDB), and stress-induced voiding.</li>
+                    <li>Indentifying key features in FIB/SEM imaging that indicate these failure mechanisms.</li>
+                </ul>
+            </div>
+
+        </section>
+
+        <section id="tool-operation" class="content">
+            <h2>Tool Operation</h2>
+            <p>Learn how to operate and maintain the tools used in the lab, including safety protocols.</p>
+        </section>
+
+        <section id="sample-prep" class="content">
+            <h2>Sample Prep Technique</h2>
+            <p>This section covers the best practices for preparing samples for analysis and testing.</p>
+        </section>
+
+        <!-- Resource sections -->
+        <section id="manuals" class="content">
+            <h2>User Manuals</h2>
+            <p>Access user manuals and documentation for lab equipment and software.</p>
+        </section>
+
+        <section id="tutorials" class="content">
+            <h2>Tutorials</h2>
+            <p>Watch video tutorials and step-by-step guides to learn lab processes.</p>
+        </section>
+
+        <section id="guides" class="content">
+            <h2>Guides</h2>
+            <p>Find comprehensive guides on industry best practices and lab protocols.</p>
+        </section>
+    </main>
+
+    <script>
+        function toggleMenu(id) {
+            const sections = document.querySelectorAll('.content');
+            sections.forEach(section => section.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+        }
+
+        function toggleTrainingSection(sectionId) {
+            const trainingSections = document.querySelectorAll('.content');
+            trainingSections.forEach(section => section.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function openOrderDetails(jobId) {
+            const newTab = window.open(`orderDetails.html?jobId=${jobId}`, '_blank');
+            newTab.focus();
+        }
+
+        function toggleResourceSection(sectionId) {
+            const resourceSections = document.querySelectorAll('.content');
+            resourceSections.forEach(section => section.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+        }
+    </script>
+
+    <script>
+        // Scene setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.5, 2000);
+        const renderer = new THREE.WebGLRenderer();
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Add a simple 3D sphere
+        const geometry = new THREE.SphereGeometry();
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+
+        camera.position.z = 5;
+
+        // Set up post-processing
+        const composer = new THREE.EffectComposer(renderer);
+        const renderPass = new THREE.RenderPass(scene, camera);
+        composer.addPass(renderPass);
+
+        // Outline pass setup
+        const outlinePass = new THREE.OutlinePass(new THREE.Vector2(window.innerWidth, window.innerHeight), scene, camera);
+        outlinePass.edgeStrength = 2.5;  // Thickness of the outline
+        outlinePass.edgeGlow = 0.5;      // Glow around the edges
+        outlinePass.edgeColor = new THREE.Color(red); // Outline color
+        composer.addPass(outlinePass);
+
+        // Specify objects to outline
+        const selectedObjects = [cube];
+        outlinePass.selectedObjects = selectedObjects;
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+            composer.render(); // Use composer for rendering with outline effect
+        }
+        // Adjust renderer and composer on window resize
+        window.addEventListener('resize', () => {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            composer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        animate();
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const ctx = document.getElementById('productivityChart').getContext('2d');
+
+            const productivityChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+                    datasets: [{
+                        label: 'Hours of Productivity',
+                        data: [3, 4, 2, 5, 6],
+                        borderColor: '#0077ff',
+                        backgroundColor: 'rgba(0, 119, 255, 0.2)',
+                        fill: true,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
